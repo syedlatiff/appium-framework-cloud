@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="EcommerceApp Test Suite">
+	<groups>
+		<run>
+			<include name = "Smoke"/>
+		</run>
+	</groups>
+	<listeners>
+		<listener class-name="org.latiffsyed.testUtils.Listeners"/>
+	</listeners>
+	<test thread-count="5" name="E2E Purchase Flow Test">
+		<classes>
+			<class name="org.latiffsyed.tests.android.PurchaseOrderFlowTest"/>
+		</classes>
+	</test>
+	<test thread-count="5" name="Login Negative and Positive Tests">
+		<classes>
+			<class name="org.latiffsyed.tests.android.LoginFormValidationTest"/>
+		</classes>
+	</test>
+	<test thread-count="5" name=" iOS Alert Handling Test">
+		<classes>
+			<class name="org.latiffsyed.tests.iOS.AlertViewMessageValidationTest"/>
+		</classes>
+	</test>
+</suite>

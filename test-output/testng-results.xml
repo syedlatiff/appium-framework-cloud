@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-07-24T11:35:24 EDT" name="BrowserStack Test Suite" finished-at="2025-07-24T11:37:02 EDT" duration-ms="98162">
+    <groups>
+      <group name="Smoke">
+        <method signature="PurchaseOrderFlowTest.EndToEndOrderFlowTest(java.util.HashMap)[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@17410c07]" name="EndToEndOrderFlowTest" class="org.latiffsyed.tests.android.PurchaseOrderFlowTest"/>
+        <method signature="PurchaseOrderFlowTest.EndToEndOrderFlowTest(java.util.HashMap)[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@1ee27d73]" name="EndToEndOrderFlowTest" class="org.latiffsyed.tests.android.PurchaseOrderFlowTest"/>
+        <method signature="PurchaseOrderFlowTest.EndToEndOrderFlowTest(java.util.HashMap)[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@542f6803]" name="EndToEndOrderFlowTest" class="org.latiffsyed.tests.android.PurchaseOrderFlowTest"/>
+      </group> <!-- Smoke -->
+    </groups>
+    <test started-at="2025-07-24T11:35:24 EDT" name="E2E Purchase Flow Test-2" finished-at="2025-07-24T11:36:06 EDT" duration-ms="42654">
+      <class name="org.latiffsyed.tests.android.PurchaseOrderFlowTest">
+        <test-method is-config="true" signature="configureAppium()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@542f6803]" started-at="2025-07-24T11:35:24 EDT" name="configureAppium" finished-at="2025-07-24T11:35:40 EDT" duration-ms="15839" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configureAppium -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@542f6803]" started-at="2025-07-24T11:35:40 EDT" name="preSetup" finished-at="2025-07-24T11:35:40 EDT" duration-ms="197" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="EndToEndOrderFlowTest(java.util.HashMap)[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@542f6803]" started-at="2025-07-24T11:35:40 EDT" name="EndToEndOrderFlowTest" data-provider="getData" finished-at="2025-07-24T11:36:04 EDT" duration-ms="24338" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{gender=Female, name=Nadu Syed, country=Australia}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EndToEndOrderFlowTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@542f6803]" started-at="2025-07-24T11:36:06 EDT" name="tearDown" finished-at="2025-07-24T11:36:06 EDT" duration-ms="647" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.latiffsyed.tests.android.PurchaseOrderFlowTest -->
+    </test> <!-- E2E Purchase Flow Test-2 -->
+    <test started-at="2025-07-24T11:35:24 EDT" name="E2E Purchase Flow Test-1" finished-at="2025-07-24T11:36:11 EDT" duration-ms="47645">
+      <class name="org.latiffsyed.tests.android.PurchaseOrderFlowTest">
+        <test-method is-config="true" signature="configureAppium()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@1ee27d73]" started-at="2025-07-24T11:35:24 EDT" name="configureAppium" finished-at="2025-07-24T11:35:40 EDT" duration-ms="15837" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configureAppium -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@1ee27d73]" started-at="2025-07-24T11:35:40 EDT" name="preSetup" finished-at="2025-07-24T11:35:40 EDT" duration-ms="197" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="EndToEndOrderFlowTest(java.util.HashMap)[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@1ee27d73]" started-at="2025-07-24T11:35:40 EDT" name="EndToEndOrderFlowTest" data-provider="getData" finished-at="2025-07-24T11:36:09 EDT" duration-ms="29152" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{gender=Female, name=Nadu Syed, country=Australia}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EndToEndOrderFlowTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@1ee27d73]" started-at="2025-07-24T11:36:11 EDT" name="tearDown" finished-at="2025-07-24T11:36:11 EDT" duration-ms="775" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.latiffsyed.tests.android.PurchaseOrderFlowTest -->
+    </test> <!-- E2E Purchase Flow Test-1 -->
+    <test started-at="2025-07-24T11:35:24 EDT" name="E2E Purchase Flow Test-0" finished-at="2025-07-24T11:36:14 EDT" duration-ms="49972">
+      <class name="org.latiffsyed.tests.android.PurchaseOrderFlowTest">
+        <test-method is-config="true" signature="configureAppium()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@17410c07]" started-at="2025-07-24T11:35:24 EDT" name="configureAppium" finished-at="2025-07-24T11:35:46 EDT" duration-ms="22344" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configureAppium -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@17410c07]" started-at="2025-07-24T11:35:46 EDT" name="preSetup" finished-at="2025-07-24T11:35:46 EDT" duration-ms="149" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="EndToEndOrderFlowTest(java.util.HashMap)[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@17410c07]" started-at="2025-07-24T11:35:46 EDT" name="EndToEndOrderFlowTest" data-provider="getData" finished-at="2025-07-24T11:36:12 EDT" duration-ms="25677" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{gender=Female, name=Nadu Syed, country=Australia}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- EndToEndOrderFlowTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.latiffsyed.tests.android.PurchaseOrderFlowTest@17410c07]" started-at="2025-07-24T11:36:13 EDT" name="tearDown" finished-at="2025-07-24T11:36:14 EDT" duration-ms="761" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.latiffsyed.tests.android.PurchaseOrderFlowTest -->
+    </test> <!-- E2E Purchase Flow Test-0 -->
+    <test started-at="2025-07-24T11:36:07 EDT" name="Login Negative and Positive Tests-0" finished-at="2025-07-24T11:36:51 EDT" duration-ms="43603">
+      <class name="org.latiffsyed.tests.android.LoginFormValidationTest">
+        <test-method is-config="true" signature="configureAppium()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@56f730b2]" started-at="2025-07-24T11:36:07 EDT" name="configureAppium" finished-at="2025-07-24T11:36:17 EDT" duration-ms="10063" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configureAppium -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@56f730b2]" started-at="2025-07-24T11:36:17 EDT" name="preSetup" finished-at="2025-07-24T11:36:18 EDT" duration-ms="357" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="FormLogin_ErrorValidationTest()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@56f730b2]" started-at="2025-07-24T11:36:18 EDT" name="FormLogin_ErrorValidationTest" finished-at="2025-07-24T11:36:33 EDT" duration-ms="15341" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FormLogin_ErrorValidationTest -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@56f730b2]" started-at="2025-07-24T11:36:34 EDT" name="preSetup" finished-at="2025-07-24T11:36:34 EDT" duration-ms="168" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="FormLogin_PositiveFlowTest()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@56f730b2]" started-at="2025-07-24T11:36:34 EDT" name="FormLogin_PositiveFlowTest" finished-at="2025-07-24T11:36:49 EDT" duration-ms="14960" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FormLogin_PositiveFlowTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@56f730b2]" started-at="2025-07-24T11:36:50 EDT" name="tearDown" finished-at="2025-07-24T11:36:51 EDT" duration-ms="615" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.latiffsyed.tests.android.LoginFormValidationTest -->
+    </test> <!-- Login Negative and Positive Tests-0 -->
+    <test started-at="2025-07-24T11:36:14 EDT" name="Login Negative and Positive Tests-2" finished-at="2025-07-24T11:37:02 EDT" duration-ms="47877">
+      <class name="org.latiffsyed.tests.android.LoginFormValidationTest">
+        <test-method is-config="true" signature="configureAppium()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@6dc1dc69]" started-at="2025-07-24T11:36:14 EDT" name="configureAppium" finished-at="2025-07-24T11:36:26 EDT" duration-ms="12477" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configureAppium -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@6dc1dc69]" started-at="2025-07-24T11:36:26 EDT" name="preSetup" finished-at="2025-07-24T11:36:27 EDT" duration-ms="176" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="FormLogin_ErrorValidationTest()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@6dc1dc69]" started-at="2025-07-24T11:36:27 EDT" name="FormLogin_ErrorValidationTest" finished-at="2025-07-24T11:36:41 EDT" duration-ms="14001" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FormLogin_ErrorValidationTest -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@6dc1dc69]" started-at="2025-07-24T11:36:44 EDT" name="preSetup" finished-at="2025-07-24T11:36:44 EDT" duration-ms="189" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="FormLogin_PositiveFlowTest()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@6dc1dc69]" started-at="2025-07-24T11:36:44 EDT" name="FormLogin_PositiveFlowTest" finished-at="2025-07-24T11:36:59 EDT" duration-ms="15325" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FormLogin_PositiveFlowTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@6dc1dc69]" started-at="2025-07-24T11:37:01 EDT" name="tearDown" finished-at="2025-07-24T11:37:02 EDT" duration-ms="1202" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.latiffsyed.tests.android.LoginFormValidationTest -->
+    </test> <!-- Login Negative and Positive Tests-2 -->
+    <test started-at="2025-07-24T11:36:12 EDT" name="Login Negative and Positive Tests-1" finished-at="2025-07-24T11:37:02 EDT" duration-ms="50293">
+      <class name="org.latiffsyed.tests.android.LoginFormValidationTest">
+        <test-method is-config="true" signature="configureAppium()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@5731d3a]" started-at="2025-07-24T11:36:12 EDT" name="configureAppium" finished-at="2025-07-24T11:36:25 EDT" duration-ms="13838" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- configureAppium -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@5731d3a]" started-at="2025-07-24T11:36:25 EDT" name="preSetup" finished-at="2025-07-24T11:36:26 EDT" duration-ms="178" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="FormLogin_ErrorValidationTest()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@5731d3a]" started-at="2025-07-24T11:36:26 EDT" name="FormLogin_ErrorValidationTest" finished-at="2025-07-24T11:36:42 EDT" duration-ms="15932" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FormLogin_ErrorValidationTest -->
+        <test-method is-config="true" signature="preSetup()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@5731d3a]" started-at="2025-07-24T11:36:44 EDT" name="preSetup" finished-at="2025-07-24T11:36:44 EDT" duration-ms="213" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- preSetup -->
+        <test-method signature="FormLogin_PositiveFlowTest()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@5731d3a]" started-at="2025-07-24T11:36:44 EDT" name="FormLogin_PositiveFlowTest" finished-at="2025-07-24T11:37:00 EDT" duration-ms="15727" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- FormLogin_PositiveFlowTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:org.latiffsyed.tests.android.LoginFormValidationTest@5731d3a]" started-at="2025-07-24T11:37:01 EDT" name="tearDown" finished-at="2025-07-24T11:37:02 EDT" duration-ms="766" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- org.latiffsyed.tests.android.LoginFormValidationTest -->
+    </test> <!-- Login Negative and Positive Tests-1 -->
+  </suite> <!-- BrowserStack Test Suite -->
+</testng-results>

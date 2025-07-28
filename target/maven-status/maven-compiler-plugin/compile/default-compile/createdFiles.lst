@@ -1,0 +1,9 @@
+org/latiffsyed/pageobjects/android/ProductCatalogue.class
+org/latiffsyed/core/utils/IOSActions.class
+org/latiffsyed/core/utils/AndroidActions.class
+org/latiffsyed/pageobjects/iOS/HomePage.class
+org/latiffsyed/pageobjects/android/FormPage.class
+org/latiffsyed/pageobjects/iOS/AlertViews.class
+org/latiffsyed/core/utils/AppiumUtils$1.class
+org/latiffsyed/core/utils/AppiumUtils.class
+org/latiffsyed/pageobjects/android/CartPage.class
