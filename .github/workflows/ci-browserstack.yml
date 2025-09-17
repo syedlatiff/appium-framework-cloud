@@ -1,0 +1,88 @@
+name: Appium CI (BrowserStack)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+
+    # Start with Android only. Add iOS later when green.
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [android]
+
+    env:
+      # Set these in GitHub → Settings → Secrets and variables → Actions
+      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      # Set true only if your tests need to reach localhost/VPN
+      BROWSERSTACK_LOCAL: "false"
+      # Helpful label you’ll see on the BrowserStack dashboard
+      BS_BUILD_NAME: "${{ github.workflow }} #${{ github.run_number }} (${{ github.ref_name }})"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install Appium tooling
+        run: |
+          npm i -g appium appium-doctor
+          appium-doctor || true
+
+      # If your repo has browserstack.yml with placeholders, this fills them at runtime.
+      - name: Inject BrowserStack creds into browserstack.yml
+        if: ${{ hashFiles('**/browserstack.yml') != '' }}
+        run: |
+          FILE=$(git ls-files | grep -m1 'browserstack.yml')
+          echo "Patching $FILE"
+          sed -i "s/<BROWSERSTACK_USERNAME>/${BROWSERSTACK_USERNAME}/g" "$FILE"
+          sed -i "s/<BROWSERSTACK_ACCESS_KEY>/${BROWSERSTACK_ACCESS_KEY}/g" "$FILE"
+
+      # If you need BrowserStack Local, set env BROWSERSTACK_LOCAL to "true" above
+      # and uncomment this block.
+      # - name: Start BrowserStack Local
+      #   if: env.BROWSERSTACK_LOCAL == 'true'
+      #   run: |
+      #     wget -q https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-x64.zip
+      #     unzip -q BrowserStackLocal-linux-x64.zip
+      #     chmod +x BrowserStackLocal
+      #     ./BrowserStackLocal --key "$BROWSERSTACK_ACCESS_KEY" --daemon start
+
+      - name: Build & Test (Maven)
+        run: |
+          mvn -B -U clean test \
+            -Dplatform=${{ matrix.target }} \
+            -DBROWSERSTACK_USERNAME="${BROWSERSTACK_USERNAME}" \
+            -DBROWSERSTACK_ACCESS_KEY="${BROWSERSTACK_ACCESS_KEY}" \
+            -DBROWSERSTACK_LOCAL="${BROWSERSTACK_LOCAL}" \
+            -DbsBuildName="${BS_BUILD_NAME}"
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ matrix.target }}
+          path: |
+            **/target/surefire-reports/**
+            **/target/failsafe-reports/**
+            **/logs/**
+            **/reports/**
+          if-no-files-found: warn
