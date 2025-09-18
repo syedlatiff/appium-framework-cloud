@@ -1,30 +1,29 @@
+cd /Users/administrator/eclipse-workspace/AppiumFrameworkDesign
+mkdir -p .github/workflows
+
+# create/overwrite the workflow
+cat > .github/workflows/ci-browserstack.yml << 'YAML'
+# (paste the entire workflow you and I just finalized)
 name: Appium CI (BrowserStack)
 
 on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  e2e:
+  android-bs:
     runs-on: ubuntu-latest
-
-    # Start with Android only. Add iOS later when green.
-    strategy:
-      fail-fast: false
-      matrix:
-        target: [android]
+    timeout-minutes: 45
 
     env:
-      # Set these in GitHub → Settings → Secrets and variables → Actions
-      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      # Set true only if your tests need to reach localhost/VPN
-      BROWSERSTACK_LOCAL: "false"
-      # Helpful label you’ll see on the BrowserStack dashboard
-      BS_BUILD_NAME: "${{ github.workflow }} #${{ github.run_number }} (${{ github.ref_name }})"
+      BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
+      BS_DEVICE: "Google Pixel 7"
+      BS_OS_VERSION: "13.0"
+      SUITE_XML: "testNGSuite/testng_Smoke.xml"
 
     steps:
       - name: Checkout
@@ -37,52 +36,46 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: Install Appium tooling
+      - name: Fail fast if secrets missing
         run: |
-          npm i -g appium appium-doctor
-          appium-doctor || true
+          [ -n "$BS_USERNAME" ] && [ -n "$BS_ACCESS_KEY" ] || {
+            echo "::error::Add BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in repo secrets"; exit 1; }
 
-      # If your repo has browserstack.yml with placeholders, this fills them at runtime.
-      - name: Inject BrowserStack creds into browserstack.yml
-        if: ${{ hashFiles('**/browserstack.yml') != '' }}
+      - name: Run TestNG on BrowserStack (no local Appium)
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
+          BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
+          BS_DEVICE: "Google Pixel 7"
+          BS_OS_VERSION: "13.0"
+          SUITE_XML: "testNGSuite/testng_Smoke.xml"
         run: |
-          FILE=$(git ls-files | grep -m1 'browserstack.yml')
-          echo "Patching $FILE"
-          sed -i "s/<BROWSERSTACK_USERNAME>/${BROWSERSTACK_USERNAME}/g" "$FILE"
-          sed -i "s/<BROWSERSTACK_ACCESS_KEY>/${BROWSERSTACK_ACCESS_KEY}/g" "$FILE"
+          echo "Running on BrowserStack: $BS_DEVICE ($BS_OS_VERSION)  app: $BS_APP_URL"
+          mvn -B -ntp -U clean test \
+            -Dtestng.suiteXmlFile="${SUITE_XML}" \
+            -DBROWSERSTACK_USERNAME="$BROWSERSTACK_USERNAME" \
+            -DBROWSERSTACK_ACCESS_KEY="$BROWSERSTACK_ACCESS_KEY" \
+            -DBROWSERSTACK_APP_URL="$BROWSERSTACK_APP_URL" \
+            -Dbs.username="$BS_USERNAME" \
+            -Dbs.accessKey="$BS_ACCESS_KEY" \
+            -Dbs.app="$BS_APP_URL" \
+            -Dbs.device="$BS_DEVICE" \
+            -Dbs.os_version="$BS_OS_VERSION" \
+            -Dbs.project="AppiumFrameworkCloud" \
+            -Dbs.build="GH Actions #${{ github.run_number }}" \
+            -Dbs.name="Android smoke"
 
-      # If you need BrowserStack Local, set env BROWSERSTACK_LOCAL to "true" above
-      # and uncomment this block.
-      # - name: Start BrowserStack Local
-      #   if: env.BROWSERSTACK_LOCAL == 'true'
-      #   run: |
-      #     wget -q https://www.browserstack.com/browserstack-local/BrowserStackLocal-linux-x64.zip
-      #     unzip -q BrowserStackLocal-linux-x64.zip
-      #     chmod +x BrowserStackLocal
-      #     ./BrowserStackLocal --key "$BROWSERSTACK_ACCESS_KEY" --daemon start
-
-      - name: Build & Test (Maven)
-        run: |
-          mvn -B -U clean test \
-            -Dplatform=${{ matrix.target }} \
-            -DBROWSERSTACK_USERNAME="${BROWSERSTACK_USERNAME}" \
-            -DBROWSERSTACK_ACCESS_KEY="${BROWSERSTACK_ACCESS_KEY}" \
-            -DBROWSERSTACK_LOCAL="${BROWSERSTACK_LOCAL}" \
-            -DbsBuildName="${BS_BUILD_NAME}"
-
-      - name: Upload test reports
+      - name: Upload TestNG/Extent reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: reports-${{ matrix.target }}
+          name: bs-android-test-reports
           path: |
             **/target/surefire-reports/**
             **/target/failsafe-reports/**
-            **/logs/**
-            **/reports/**
+            reports/**
+            test-output/**
           if-no-files-found: warn
