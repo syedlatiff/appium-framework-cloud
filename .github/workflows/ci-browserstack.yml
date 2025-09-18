@@ -1,9 +1,4 @@
-cd /Users/administrator/eclipse-workspace/AppiumFrameworkDesign
-mkdir -p .github/workflows
 
-# create/overwrite the workflow
-cat > .github/workflows/ci-browserstack.yml << 'YAML'
-# (paste the entire workflow you and I just finalized)
 name: Appium CI (BrowserStack)
 
 on:
