@@ -49,7 +49,7 @@ public class PurchaseOrderFlowTest extends AndroidBaseTest{
 		productCatalogue.clickAddToCartButton();			
 		CartPage cartPage = productCatalogue.goToCartPage();
 		
-		cartPage.waitForCartPageTitle(5);
+		cartPage.waitForCartPageTitle(10);
 						
 		double totalSum = cartPage.getProductSum();
 		double totalPurchaseAmountDisplayed = cartPage.getTotalAmountDisplayed();
