@@ -12,14 +12,13 @@ jobs:
     timeout-minutes: 45
 
     env:
-      # Tell BaseTest to skip local Appium
       RUN_ON_BS: "true"
-      # BrowserStack credentials
-      BROWSERSTACK_USERNAME: "${{ secrets.BROWSERSTACK_USERNAME }}"
-      BROWSERSTACK_ACCESS_KEY: "${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
-      # Force the SDK to use THIS config file (Android-only devices inside)
+      BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
-      # Your TestNG suite that includes only Android tests
+      BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
+      BS_DEVICE: "Google Pixel 7"
+      BS_OS_VERSION: "13.0"
       SUITE_XML: "testNGSuite/testng_BrowserStack.xml"
 
     steps:
@@ -35,36 +34,50 @@ jobs:
 
       - name: Fail fast if secrets missing
         run: |
-          [ -n "$BROWSERSTACK_USERNAME" ] && [ -n "$BROWSERSTACK_ACCESS_KEY" ] || {
-            echo "::error::Add BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in repo secrets"; exit 1; }
+          [ -n "$BS_USERNAME" ] && [ -n "$BS_ACCESS_KEY" ] || {
+            echo "::error::Add BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in repo secrets"
+            exit 1
+          }
 
-      - name: Show BrowserStack config being used
+      - name: Run TestNG on BrowserStack (no local Appium)
+        env:
+          RUN_ON_BS: "true"
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BROWSERSTACK_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
+          BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
+          BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
+          BS_DEVICE: "Google Pixel 7"
+          BS_OS_VERSION: "13.0"
+          SUITE_XML: "testNGSuite/testng_BrowserStack.xml"
         run: |
-          echo "Config file: $BROWSERSTACK_CONFIG_FILE"
-          echo "----- BEGIN $BROWSERSTACK_CONFIG_FILE -----"
-          cat "$BROWSERSTACK_CONFIG_FILE"
-          echo "----- END $BROWSERSTACK_CONFIG_FILE -----"
-          echo "Any iOS hints in YAML?"
-          grep -nEi 'iphone|ipad|platformName:\s*ios' "$BROWSERSTACK_CONFIG_FILE" || echo "No iOS found"
-
-      - name: Run TestNG on BrowserStack (Android only)
-        run: |
+          echo "Running on BrowserStack: $BS_DEVICE ($BS_OS_VERSION) app: $BS_APP_URL"
           mvn -B -ntp -U clean test \
-            -PBrowserStack \
-            -DRUN_ON_BS=true \
-            -Dbrowserstack.config="$BROWSERSTACK_CONFIG_FILE" \
-            -Dtestng.suiteXmlFile="$SUITE_XML"
+            -Dtestng.suiteXmlFile="${SUITE_XML}" \
+            -DRUN_ON_BS="true" \
+            -DBROWSERSTACK_USERNAME="$BROWSERSTACK_USERNAME" \
+            -DBROWSERSTACK_ACCESS_KEY="$BROWSERSTACK_ACCESS_KEY" \
+            -DBROWSERSTACK_APP_URL="$BROWSERSTACK_APP_URL" \
+            -DBROWSERSTACK_CONFIG_FILE="$BROWSERSTACK_CONFIG_FILE" \
+            -Dbs.username="$BS_USERNAME" \
+            -Dbs.accessKey="$BS_ACCESS_KEY" \
+            -Dbs.app="$BS_APP_URL" \
+            -Dbs.device="$BS_DEVICE" \
+            -Dbs.os_version="$BS_OS_VERSION" \
+            -Dbs.project="AppiumFrameworkCloud" \
+            -Dbs.build="GH Actions #${{ github.run_number }}" \
+            -Dbs.name="Android smoke"
 
-      - name: Upload reports & BrowserStack agent log
+      - name: Upload TestNG/Extent reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: bs-android-test-artifacts
+          name: bs-android-test-reports
           path: |
             **/target/surefire-reports/**
             **/target/failsafe-reports/**
-            test-output/**
             reports/**
-            logs/browserstack-javaagent.log
-            **/browserstack-javaagent.log
+            test-output/**
           if-no-files-found: warn
