@@ -53,7 +53,7 @@ public class LoginFormValidationTest extends AndroidBaseTest{
 		formPage.setGender("Female");
 		formPage.setCountrySelection("Australia");
 		formPage.submitForm();	
-		formPage.waitForSeconds(3);
+		formPage.waitForSeconds(2);
 		String toastMessage = formPage.getErrorMessage();
 		AssertJUnit.assertEquals(toastMessage,"Please enter your name");	
 			
