@@ -54,7 +54,7 @@ jobs:
           SUITE_XML: "testNGSuite/testng_BrowserStack.xml"
         run: |
           echo "Running on BrowserStack: $BS_DEVICE ($BS_OS_VERSION) app: $BS_APP_URL"
-          mvn -B -ntp -U clean test \
+          mvn -B -ntp -U clean test -PBrowserStack \
             -Dtestng.suiteXmlFile="${SUITE_XML}" \
             -DRUN_ON_BS="true" \
             -DBROWSERSTACK_USERNAME="$BROWSERSTACK_USERNAME" \
