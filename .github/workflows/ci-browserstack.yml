@@ -15,7 +15,7 @@ jobs:
       RUN_ON_BS: "true"
       BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
+      #BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
       BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
       BS_DEVICE: "Google Pixel 7"
       BS_OS_VERSION: "13.0"
@@ -45,7 +45,7 @@ jobs:
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
-          BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
+          #BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
           BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
@@ -60,7 +60,6 @@ jobs:
             -DBROWSERSTACK_USERNAME="$BROWSERSTACK_USERNAME" \
             -DBROWSERSTACK_ACCESS_KEY="$BROWSERSTACK_ACCESS_KEY" \
             -DBROWSERSTACK_APP_URL="$BROWSERSTACK_APP_URL" \
-            -DBROWSERSTACK_CONFIG_FILE="$BROWSERSTACK_CONFIG_FILE" \
             -Dbs.username="$BS_USERNAME" \
             -Dbs.accessKey="$BS_ACCESS_KEY" \
             -Dbs.app="$BS_APP_URL" \
@@ -68,7 +67,7 @@ jobs:
             -Dbs.os_version="$BS_OS_VERSION" \
             -Dbs.project="AppiumFrameworkCloud" \
             -Dbs.build="GH Actions #${{ github.run_number }}" \
-            -Dbs.name="Android smoke"
+            -Dbs.name="Android BrowserStack Smoke"
 
       - name: Upload TestNG/Extent reports
         if: always()
