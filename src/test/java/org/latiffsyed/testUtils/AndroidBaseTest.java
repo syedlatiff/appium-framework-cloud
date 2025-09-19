@@ -63,8 +63,10 @@ public class AndroidBaseTest extends AppiumUtils {
             String bsUsername = System.getProperty("BROWSERSTACK_USERNAME");
             String bsAccessKey = System.getProperty("BROWSERSTACK_ACCESS_KEY");
             String bsAppUrl = System.getProperty("BROWSERSTACK_APP_URL");
-            String bsDevice = System.getProperty("bs.device", "Google Pixel 7");
-            String bsOsVersion = System.getProperty("bs.os_version", "13.0");
+            
+            // Keep these as fallbacks, but they'll be null now (which is fine)
+            String bsDevice = System.getProperty("bs.device");        // Now null
+            String bsOsVersion = System.getProperty("bs.os_version"); // Now null
             
             if (bsUsername == null || bsAccessKey == null) {
                 throw new RuntimeException("BrowserStack credentials not found! Please set BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY");
@@ -85,9 +87,14 @@ public class AndroidBaseTest extends AppiumUtils {
                 put("consoleLogs", "info");
             }});
             
-            // Android Device capabilities
-            options.setDeviceName(bsDevice);
-            options.setPlatformVersion(bsOsVersion);
+            // Only set device capabilities if explicitly provided via command line
+            if (bsDevice != null) {
+                options.setDeviceName(bsDevice);
+            }
+            if (bsOsVersion != null) {
+                options.setPlatformVersion(bsOsVersion);
+            }
+            
             options.setApp(bsAppUrl);
             
             // BrowserStack hub URL

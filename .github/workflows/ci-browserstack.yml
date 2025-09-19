@@ -17,8 +17,6 @@ jobs:
       BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       #BROWSERSTACK_CONFIG_FILE: "browserstack.yml"
       BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
-      BS_DEVICE: "Google Pixel 7"
-      BS_OS_VERSION: "13.0"
       SUITE_XML: "testNGSuite/testng_BrowserStack.xml"
 
     steps:
@@ -39,7 +37,7 @@ jobs:
             exit 1
           }
 
-      - name: Run TestNG on BrowserStack (no local Appium)
+      - name: Run Android Tests on BrowserStack (no local Appium)
         env:
           RUN_ON_BS: "true"
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
@@ -49,8 +47,6 @@ jobs:
           BS_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           BS_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
-          BS_DEVICE: "Google Pixel 7"
-          BS_OS_VERSION: "13.0"
           SUITE_XML: "testNGSuite/testng_BrowserStack.xml"
         run: |
           echo "Running on BrowserStack: $BS_DEVICE ($BS_OS_VERSION) app: $BS_APP_URL"
@@ -63,8 +59,6 @@ jobs:
             -Dbs.username="$BS_USERNAME" \
             -Dbs.accessKey="$BS_ACCESS_KEY" \
             -Dbs.app="$BS_APP_URL" \
-            -Dbs.device="$BS_DEVICE" \
-            -Dbs.os_version="$BS_OS_VERSION" \
             -Dbs.project="AppiumFrameworkCloud" \
             -Dbs.build="GH Actions #${{ github.run_number }}" \
             -Dbs.name="Android BrowserStack Smoke"
