@@ -38,6 +38,7 @@ jobs:
 
       - name: Run TestNG on BrowserStack (no local Appium)
         env:
+		  RUN_ON_BS: "true"	
           BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           BROWSERSTACK_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
@@ -50,6 +51,7 @@ jobs:
         run: |
           echo "Running on BrowserStack: $BS_DEVICE ($BS_OS_VERSION)  app: $BS_APP_URL"
           mvn -B -ntp -U clean test \
+		    -DRUN_ON_BS="true" \
             -Dtestng.suiteXmlFile="${SUITE_XML}" \
             -DBROWSERSTACK_USERNAME="$BROWSERSTACK_USERNAME" \
             -DBROWSERSTACK_ACCESS_KEY="$BROWSERSTACK_ACCESS_KEY" \
