@@ -49,7 +49,7 @@ jobs:
           BS_APP_URL: "bs://60be83a0baaae51dbac31b21298f5989bc1d3a8d"
           BS_DEVICE: "Google Pixel 7"
           BS_OS_VERSION: "13.0"
-          SUITE_XML: "testNGSuite/testng_Smoke.xml"
+          SUITE_XML: "testNGSuite/testng_BrowserStack.xml"
         run: |
           echo "Running on BrowserStack: $BS_DEVICE ($BS_OS_VERSION) app: $BS_APP_URL"
           mvn -B -ntp -U clean test \
